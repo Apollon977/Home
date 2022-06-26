@@ -17,7 +17,6 @@ export const SearchContext = React.createContext();
 function App() {
 
   const [searchValue, setSearchValue] = React.useState('');
-  console.log('pre-production active')
 
   return (
     <div className="wrapper">

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import axios from 'axios';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Sceleton from '../components/PizzaBlock/Sceleton';
@@ -12,7 +12,7 @@ import { SearchContext } from '../App';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categoryId, sort } = useSelector((state) => state.filterSlice);
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filterSlice);
   const sortType = sort.sortProperty;
 
   const onClickCategory = (id) => {
@@ -22,7 +22,10 @@ const Home = () => {
   const { searchValue } = React.createContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
+  };
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -32,15 +35,6 @@ const Home = () => {
     const sortBy = sortType.replace('-', '');
     const order = sortType.includes('-') ? 'asc' : 'desc';
 
-    // fetch(
-    //   `https://62a3963b21232ff9b2229be6.mockapi.io/Items?page=${currentPage}&limit=4&${category}&${search}&sortBy=${sortBy}&order=${order}`,
-    // )
-    //   .then((res) => res.json())
-    //   .then((arr) => {
-    //     setItems(arr);
-    //     console.log(arr);
-    //     setIsLoading(false);
-    //   });
     axios
       .get(
         `https://62a3963b21232ff9b2229be6.mockapi.io/Items?page=${currentPage}&limit=4&${category}&${search}&sortBy=${sortBy}&order=${order}`,
@@ -63,7 +57,7 @@ const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? sceletons : pizzas}</div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };
