@@ -18,6 +18,7 @@ function App() {
 
   const [searchValue, setSearchValue] = React.useState('');
   console.log('pre-production active')
+  console.log('NewBranch active')
 
   return (
     <div className="wrapper">
