@@ -28,6 +28,7 @@ function App() {
       <div className="content">
       
          <Routes>
+         <Route path="/Home" element={<Home  />}/>
           <Route path="/" element={<Home  />}/>
           <Route path="/cart" element={<Cart />}/>
           <Route path="*" element={<Page404 />}/>

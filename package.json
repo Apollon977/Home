@@ -2,7 +2,7 @@
   "name": "react-pizza",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://apollon977.github.io/React-pizza/",
+  "homepage": "https://apollon977.github.io/Home/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
@@ -26,7 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
